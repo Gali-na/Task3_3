@@ -14,7 +14,7 @@ public class SalaryInfo {
         StringBuilder order;
         order = new StringBuilder("Отчёт за период" + " " + dateFrom + " - " + dateTo);
         LocalDate dateStart = LocalDate.parse(dateFromTemp.toString());
-        LocalDate localStop = LocalDate.parse(dateFromTo.toString());
+        LocalDate datelStop = LocalDate.parse(dateFromTo.toString());
         for (int i = 0; i < names.length; i++) {
             int moneySum = 0;
             String nameInOrder = new String();
@@ -33,19 +33,19 @@ public class SalaryInfo {
                 int hours = Integer.parseInt(dataEach[2]);
                 int money = Integer.parseInt(dataEach[3]);
                 if ((names[i].equals(dataName.toString()))
-                        && localStop.compareTo(dateStart) >= 0
+                        && datelStop.compareTo(dateStart) >= 0
                         && localDate.compareTo(dateStart) >= 0
-                        && localDate.compareTo(localStop) <= 0) {
+                        && localDate.compareTo(datelStop) <= 0) {
                     moneySum = moneySum + (money * hours);
                     nameInOrder = names[i];
                 }
-                if (localStop.compareTo(dateStart) < 0) {
+                if (datelStop.compareTo(dateStart) < 0) {
                     moneySum = 0;
                 }
                 nameInOrder = names[i];
             }
             order.append("\n" + nameInOrder + " " + "- " + moneySum);
-            if (localStop.compareTo(dateStart) < 0) {
+            if (datelStop gi.compareTo(dateStart) < 0) {
 
                 throw new IllegalDateParametersException("Wrong parameters");
             }
