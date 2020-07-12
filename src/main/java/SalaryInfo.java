@@ -45,7 +45,7 @@ public class SalaryInfo {
                 nameInOrder = names[i];
             }
             order.append("\n" + nameInOrder + " " + "- " + moneySum);
-            if (datelStop gi.compareTo(dateStart) < 0) {
+            if (datelStop.compareTo(dateStart) < 0) {
 
                 throw new IllegalDateParametersException("Wrong parameters");
             }
