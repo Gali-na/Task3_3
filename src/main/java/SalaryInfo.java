@@ -1,8 +1,8 @@
 import exception.IllegalDateParametersException;
-
 import java.time.LocalDate;
 
 public class SalaryInfo {
+
     public String getSalaryInfo(String[] names, String[] data, String dateFrom, String dateTo)
             throws Exception {
         String[] dateFromAr = dateFrom.split("[(.)]");
@@ -15,12 +15,14 @@ public class SalaryInfo {
         order = new StringBuilder("Отчёт за период" + " " + dateFrom + " - " + dateTo);
         LocalDate dateStart = LocalDate.parse(dateFromTemp.toString());
         LocalDate datelStop = LocalDate.parse(dateFromTo.toString());
-        for (int i = 0; i < names.length; i++) {
+
+        for (String name : names) {
             int moneySum = 0;
-            String nameInOrder = new String();
-            for (int j = 0; j < data.length; j++) {
+            String nameInOrder = "";
+
+            for (String datum : data) {
                 String[] dataEach = new String[4];
-                dataEach = data[j].split(" ");
+                dataEach = datum.split(" ");
                 String dataTest = dataEach[0];
                 String separator = "[(.)]";
                 String[] dateAr;
@@ -32,21 +34,22 @@ public class SalaryInfo {
                 StringBuilder dataName = new StringBuilder(dataEach[1]);
                 int hours = Integer.parseInt(dataEach[2]);
                 int money = Integer.parseInt(dataEach[3]);
-                if ((names[i].equals(dataName.toString()))
+                if ((name.equals(dataName.toString()))
                         && datelStop.compareTo(dateStart) >= 0
                         && localDate.compareTo(dateStart) >= 0
                         && localDate.compareTo(datelStop) <= 0) {
                     moneySum = moneySum + (money * hours);
-                    nameInOrder = names[i];
+                    nameInOrder = name;
                 }
+
                 if (datelStop.compareTo(dateStart) < 0) {
                     moneySum = 0;
                 }
-                nameInOrder = names[i];
+                nameInOrder = name;
             }
             order.append("\n" + nameInOrder + " " + "- " + moneySum);
-            if (datelStop.compareTo(dateStart) < 0) {
 
+            if (datelStop.compareTo(dateStart) < 0) {
                 throw new IllegalDateParametersException("Wrong parameters");
             }
         }
