@@ -1,6 +1,7 @@
 package exception;
 
-    public class IllegalDateParametersException extends Exception {
+public class IllegalDateParametersException extends Exception {
+
     public IllegalDateParametersException() {
         super();
     }
